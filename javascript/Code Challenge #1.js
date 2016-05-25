@@ -1,2 +1,1 @@
-var answer = 42;
-var cake = 'yummy'; 
+var answer=42,cake='yummy'; 

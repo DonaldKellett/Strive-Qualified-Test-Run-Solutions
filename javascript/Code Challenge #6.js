@@ -1,12 +1,11 @@
-function convertFrac(lst) {
-  var denom = lst.map(frac => frac[1]);
-  var i = 1, commonDenomFound = !1;
-  while (!commonDenomFound) {
-    if (denom.filter(n=>i%n==0).length === denom.length) {
-      var commonDenom = i;
-      commonDenomFound = !0;
+const convertFrac = fs => {
+  let ds = fs.map(f=>f[1]), i = 1, cd, found = !1;
+  while (!found) {
+    if (!ds.filter(e=>i%e).length) {
+      found = true;
+      cd = i;
     }
     i++;
   }
-  return lst.map(frac => `(${frac[0] * commonDenom / frac[1]},${commonDenom})`).join("");
+  return fs.map(f=>`(${f[0]*cd/f[1]},${cd})`).join("");
 }
