@@ -1,4 +1,3 @@
-def convertFracts lst
-  common_denominator = lst.map { |f| f[1] }.reduce(:lcm)
-  lst.map { |f| [f[0] * common_denominator / f[1], common_denominator] }
+def convertFracts fs
+  fs.map { |f| [f[0] * (cd = fs.map { |f| f[1] }.reduce(:lcm)) / f[1], cd] }
 end
