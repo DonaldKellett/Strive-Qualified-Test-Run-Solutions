@@ -1,11 +1,1 @@
-const convertFrac = fs => {
-  let ds = fs.map(f=>f[1]), i = 1, cd, found = !1;
-  while (!found) {
-    if (!ds.filter(e=>i%e).length) {
-      found = true;
-      cd = i;
-    }
-    i++;
-  }
-  return fs.map(f=>`(${f[0]*cd/f[1]},${cd})`).join("");
-}
+const gcd=(a,b)=>b==0?a:gcd(b,a%b),lcm=(a,b)=>a*b/gcd(a,b),convertFrac=a=>a.map(f=>`(${f[0]*(d=a.map(f=>f[1]).reduce(lcm,1))/f[1]},${d})`).join("");
