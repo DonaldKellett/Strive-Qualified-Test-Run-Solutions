@@ -1,11 +1,3 @@
-convertFrac = (fs) ->
-  ds = fs.map((f) -> f[1])
-  cd = 1
-  i = 1
-  found = !1
-  while !found
-    if !ds.filter((e) -> i % e).length
-      found = true
-      cd = i
-    i++
-  fs.map((f) -> "(" + f[0] * cd / f[1] + "," + cd + ")").join("")
+gcd = (a, b) -> if b == 0 then a else gcd(b, a % b)
+lcm = (a, b) -> a * b / gcd(a, b)
+convertFrac = (fs) -> fs.map((f) -> "(" + f[0] * (cd = fs.map((f) -> f[1]).reduce(lcm, 1)) / f[1] + "," + cd + ")").join("")
