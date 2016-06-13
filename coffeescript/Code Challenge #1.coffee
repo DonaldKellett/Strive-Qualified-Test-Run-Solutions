@@ -1,2 +1,1 @@
-answer = 42
-cake = 'yummy'
+[answer, cake] = [42, "yummy"]
