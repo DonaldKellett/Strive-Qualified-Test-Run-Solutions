@@ -1,0 +1,81 @@
+// Helper Function
+
+@function str-to-list($str) {
+  $list: ();
+  $s: unquote($str);
+  @for $i from 1 through str-length($s) {
+    $list: append($list, str-slice($s, $i, $i), comma);
+  }
+  @return $list;
+}
+
+// Actual tested function
+
+@function get-middle($s) {
+  @return if(str-length($s) % 2 != 0, quote(nth(str-to-list($s), ceil(str-length($s) / 2))),"#{nth(str-to-list($s), str-length($s) / 2)}#{nth(str-to-list($s), str-length($s) / 2 + 1)}");
+}
+
+/*
+.test {
+  input: "test";
+  expected: "es";
+  actual: get-middle('test');
+  pass: get-middle('test') == 'es';
+}
+
+.bacon {
+  input: "bacon";
+  expected: "c";
+  actual: get-middle("bacon");
+  pass: get-middle("bacon") == 'c';
+}
+
+.explanation {
+  input: "explanation";
+  expected: "n";
+  actual: get-middle("explanation");
+  pass: get-middle("explanation") == 'n';
+}
+
+.assert_equals {
+  input: "assert_equals";
+  expected: "_";
+  actual: get-middle("assert_equals");
+  pass: get-middle("assert_equals") == "_";
+}
+
+.testing {
+  input: "testing";
+  expected: "t";
+  actual: get-middle("testing");
+  pass: get-middle('testing') == 't';
+}
+
+.middle {
+  input: "middle";
+  expected: "dd";
+  actual: get-middle("middle");
+  pass: get-middle('middle') == 'dd';
+}
+
+.A {
+  input: "A";
+  expected: "A";
+  actual: get-middle('A');
+  pass: get-middle('A') == 'A';
+}
+
+.supercalifragilisticexpialidocious {
+  input: "supercalifragilisticexpialidocious";
+  expected: "st";
+  actual: get-middle("supercalifragilisticexpialidocious");
+  pass: get-middle("supercalifragilisticexpialidocious") == 'st';
+}
+
+.the-cow-jumped-over-the-moon {
+  input: "The cow jumped over the moon.";
+  expected: " ";
+  actual: get-middle("The cow jumped over the moon.");
+  pass: get-middle("The cow jumped over the moon.") == ' ';
+}
+*/
