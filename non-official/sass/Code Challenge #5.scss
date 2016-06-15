@@ -1,0 +1,78 @@
+// Helper Functions
+
+@function str-to-list($s) {
+  $list: ();
+  @for $i from 1 through str-length($s) {
+    $list: append($list, str-slice($s, $i, $i), comma);
+  }
+  @return $list;
+}
+
+@function list-join($list, $separator) {
+  @if length($list) == 0 {@return "";}
+  @if length($list) == 1 {@return nth($list, 1);}
+  $result: nth($list, 1);
+  @for $i from 2 through length($list) {
+    $result: $result + $separator;
+    $result: $result + nth($list, $i);
+  }
+  @return $result;
+}
+
+@function repeat-str($s, $t) {
+  @if ($t == 0) {@return "";}
+  @if ($t == 1) {@return $s;}
+  $result: "";
+  @for $i from 1 through $t {
+    $result: $result + $s;
+  }
+  @return $result;
+}
+
+// Actual function to be tested
+
+@function accum($s) {
+  $l: str-to-list(to-lower-case($s));
+  @for $i from 1 through length($l) {
+    $l: set-nth($l, $i, to-upper-case(nth($l, $i)) + repeat-str(nth($l, $i), $i - 1));
+  }
+  $l: list-join($l, "-");
+  @return $l;
+}
+
+/*
+.ZpglnRxqenU {
+  input: "ZpglnRxqenU";
+  expected: "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu";
+  actual: accum("ZpglnRxqenU");
+  pass: accum("ZpglnRxqenU") == "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu";
+}
+
+.NyffsGeyylB {
+  input: "NyffsGeyylB";
+  expected: "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb";
+  actual: accum("NyffsGeyylB");
+  pass: accum("NyffsGeyylB") == "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb";
+}
+
+.abcd {
+  input: "abcd";
+  expected: "A-Bb-Ccc-Dddd";
+  actual: accum("abcd");
+  pass: accum("abcd") == "A-Bb-Ccc-Dddd";
+}
+
+.cwAt {
+  input: "cwAt";
+  expected: "C-Ww-Aaa-Tttt";
+  actual: accum("cwAt");
+  pass: accum("cwAt") == "C-Ww-Aaa-Tttt";
+}
+
+.RqaEzty {
+  input: "RqaEzty";
+  expected: "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy";
+  actual: accum("RqaEzty");
+  pass: accum("RqaEzty") == "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy";
+}
+*/
