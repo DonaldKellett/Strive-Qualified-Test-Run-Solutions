@@ -1,0 +1,52 @@
+@function stringy($size) {
+  @if $size == 0 {@return '';}
+  $result: '';
+  @for $i from 1 through $size {
+    $result: $result + ($i % 2);
+  }
+  @return $result;
+}
+
+/*
+.size-0 {
+  expected: '';
+  actual: stringy(0);
+  pass: stringy(0) == '';
+}
+
+.size-1 {
+  expected: '1';
+  actual: stringy(1);
+  pass: stringy(1) == '1';
+}
+
+.size-2 {
+  expected: '10';
+  actual: stringy(2);
+  pass: stringy(2) == '10';
+}
+
+.size-3 {
+  expected: '101';
+  actual: stringy(3);
+  pass: stringy(3) == '101';
+}
+
+.size-4 {
+  expected: '1010';
+  actual: stringy(4);
+  pass: stringy(4) == '1010';
+}
+
+.size-10 {
+  expected: '1010101010';
+  actual: stringy(10);
+  pass: stringy(10) == '1010101010';
+}
+
+.size-25 {
+  expected: '1010101010101010101010101';
+  actual: stringy(25);
+  pass: stringy(25) == '1010101010101010101010101';
+}
+*/
