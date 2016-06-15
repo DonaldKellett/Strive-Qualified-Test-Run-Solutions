@@ -1,0 +1,94 @@
+// Helper Functions
+
+@function pow($base, $exponent) {
+  $result: 1;
+  @for $i from 1 through $exponent {
+    $result: $result * $base;
+  }
+  @return $result;
+}
+
+@function round-to($n, $d) {
+  @return round($n * pow(10, $d)) / pow(10, $d);
+}
+
+@function sqrt($n) {
+  @if $n == 0 {@return 0;}
+  $r: $n / 2;
+  @while true {
+    $s: (($n / $r) + $r) / 2;
+    @if round-to($r, 5) == round-to($s, 5) {@return round-to($r, 5);}
+    $r: $s;
+  }
+}
+
+// Actual function to be tested
+
+@function is-square($n) {
+  @return if($n < 0, false, sqrt($n) % 1 == 0);
+}
+
+/*
+.neg-nums-1 {
+  input: -100;
+  expected: false;
+  actual: is-square(-100);
+  pass: is-square(-100) == false;
+}
+
+.neg-nums-2 {
+  input: -16;
+  expected: false;
+  actual: is-square(-16);
+  pass: is-square(-16) == false;
+}
+
+.neg-nums-3 {
+  input: -2;
+  expected: false;
+  actual: is-square(-2);
+  pass: is-square(-2) == false;
+}
+
+.zero {
+  input: 0;
+  expected: true;
+  actual: is-square(0);
+  pass: is-square(0) == true;
+}
+
+.one {
+  input: 1;
+  expected: true;
+  actual: is-square(1);
+  pass: is-square(1) == true;
+}
+
+.three {
+  input: 3;
+  expected: false;
+  actual: is-square(3);
+  pass: is-square(3) == false;
+}
+
+.four {
+  input: 4;
+  expected: true;
+  actual: is-square(4);
+  pass: is-square(4) == true;
+}
+
+.ten {
+  input: 10;
+  expected: false;
+  actual: is-square(10);
+  pass: is-square(10) == false;
+}
+
+.sixteen {
+  input: 16;
+  expected: true;
+  actual: is-square(16);
+  pass: is-square(16) == true;
+}
+*/
