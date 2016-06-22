@@ -12,12 +12,6 @@ func stringy(n: Int) -> String {
 
 // Test Cases
 class testingCodeChallenge2: XCTestCase {
-    override func setUp() {
-        super.setUp()
-    }
-    override func tearDown() {
-        super.tearDown()
-    }
     func testThatStringyReturnsEmptyStringForLength0() {
         XCTAssert(stringy(0) == "", "When n = 0, an empty stringy should be returned")
     }
